@@ -108,40 +108,87 @@ document.addEventListener('DOMContentLoaded', () => {
     showProject(currentIndex);
 });
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const goTopButton = document.getElementById('go-top');
-//     const aboutMeSection = document.getElementById('about-me');
-//
-//     const options = {
-//         root: null,
-//         rootMargin: '0px',
-//         threshold: 0.1
-//     };
-//
-//     const observer = new IntersectionObserver((entries) => {
-//         entries.forEach(entry => {
-//             if (entry.target === aboutMeSection) {
-//                 if (entry.isIntersecting) {
-//                     // Hide 'Go Top' button when 'About Me' section is in view
-//                     goTopButton.classList.add('opacity-0');
-//                     goTopButton.classList.remove('opacity-100');
-//                 } else {
-//                     // Show 'Go Top' button when 'About Me' section is not in view
-//                     goTopButton.classList.remove('opacity-0');
-//                     goTopButton.classList.add('opacity-100');
-//                 }
-//             }
-//         });
-//     }, options);
-//
-//     observer.observe(aboutMeSection);
-//
-//     // Smooth scroll to the top when the button is clicked
-//     goTopButton.addEventListener('click', (event) => {
-//         event.preventDefault();
-//         setTimeout(() => {
-//             window.scrollTo(0, 0);
-//         }, 0); // Delays to ensure no other blocking code
-//     });
-//
-// });
+document.addEventListener('DOMContentLoaded', () => {
+    const goTopButton = document.getElementById('go-top');
+    const main = document.getElementById('main-content');
+    const aboutMeSection = document.getElementById('about-me');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.target === aboutMeSection) {
+                if (entry.isIntersecting) {
+                    // Hide 'Go Top' button when 'About Me' section is in view
+                    goTopButton.classList.add('opacity-0');
+                    goTopButton.classList.remove('opacity-100');
+                } else {
+                    // Show 'Go Top' button when 'About Me' section is not in view
+                    goTopButton.classList.remove('opacity-0');
+                    goTopButton.classList.add('opacity-100');
+                }
+            }
+        });
+    }, options);
+
+    observer.observe(aboutMeSection);
+
+    // Smooth scroll to the top when the button is clicked
+    goTopButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        if(window.innerWidth >= 768) {
+            main.scroll({
+                top: 0,
+                behavior: "smooth",
+            })
+        } else {
+            window.scroll({
+                top: 0,
+                behavior: "smooth",
+            })
+        }
+
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const image1 = document.getElementById('project-1-image');
+    const image1Overlay = document.getElementById('project-1-image-overlay');
+    const elements = [image1, image1Overlay];
+
+    const handleOver = () => {
+        image1Overlay.classList.remove('hidden'); // Make sure the overlay is visible
+        image1Overlay.classList.add('-translate-x-full');
+
+        // Apply transition with a slight delay to make sure the class is added
+        setTimeout(() => {
+            image1Overlay.classList.add('transition', 'duration-500', 'translate-x-0');
+            image1Overlay.classList.remove('-translate-x-full');
+        }, 10);
+
+        image1.classList.add('transition', 'duration-500', 'blur', 'scale-105');
+    };
+
+    const handleOut = () => {
+        image1.classList.remove('blur', 'scale-105');
+        image1Overlay.classList.remove('blur');
+
+        // Reset overlay position with a slight delay
+        setTimeout(() => {
+            image1Overlay.classList.add('-translate-x-full');
+            image1Overlay.classList.remove('translate-x-0');
+        }, 10);
+    };
+
+    // Attach event listeners for each element
+    elements.forEach(element => {
+        element.addEventListener('mouseover', handleOver);
+        element.addEventListener('touchstart', handleOver);
+        element.addEventListener('mouseout', handleOut);
+        element.addEventListener('touchend', handleOut);
+    });
+});
