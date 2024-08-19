@@ -76,3 +76,72 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const projects = document.querySelectorAll('.project-item');
+    let currentIndex = 0;
+
+    const showProject = (index) => {
+        projects.forEach((project, i) => {
+            project.classList.toggle('hidden', i !== index);
+
+            project.classList.add('blur-xl')
+            //delay here
+            setTimeout(() => {
+                project.classList.add('transition', 'duration-500');
+                project.classList.remove('opacity-0', 'blur-xl');
+            }, 10);
+        });
+    };
+
+    document.getElementById('next-project').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % projects.length;
+        showProject(currentIndex);
+    });
+
+    document.getElementById('prev-project').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+        showProject(currentIndex);
+    });
+
+    // Initialize first project
+    showProject(currentIndex);
+});
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const goTopButton = document.getElementById('go-top');
+//     const aboutMeSection = document.getElementById('about-me');
+//
+//     const options = {
+//         root: null,
+//         rootMargin: '0px',
+//         threshold: 0.1
+//     };
+//
+//     const observer = new IntersectionObserver((entries) => {
+//         entries.forEach(entry => {
+//             if (entry.target === aboutMeSection) {
+//                 if (entry.isIntersecting) {
+//                     // Hide 'Go Top' button when 'About Me' section is in view
+//                     goTopButton.classList.add('opacity-0');
+//                     goTopButton.classList.remove('opacity-100');
+//                 } else {
+//                     // Show 'Go Top' button when 'About Me' section is not in view
+//                     goTopButton.classList.remove('opacity-0');
+//                     goTopButton.classList.add('opacity-100');
+//                 }
+//             }
+//         });
+//     }, options);
+//
+//     observer.observe(aboutMeSection);
+//
+//     // Smooth scroll to the top when the button is clicked
+//     goTopButton.addEventListener('click', (event) => {
+//         event.preventDefault();
+//         setTimeout(() => {
+//             window.scrollTo(0, 0);
+//         }, 0); // Delays to ensure no other blocking code
+//     });
+//
+// });
