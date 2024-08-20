@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/fonts/Roboto.woff2) format('woff2');
+    }
+    .parallax-bg {
+        background-image: url('https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .container {
+        width: 100%;
+        position: relative;
+    }
+
+    .cards {
+        position: absolute;
+        left: 0;
+        pointer-events: none;
+    }
+
+    .pointer-auto {
+        pointer-events: auto;
+    }
+
+    .pointer-none {
+        pointer-events: none;
+    }
+
+    .card {
+        border: 1px solid rgb(204, 204, 204);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card__content {
+        color: rgb(139, 137, 137);
+        padding: 10px;
+    }
+}
+
