@@ -107,35 +107,82 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//Slider script
 document.addEventListener('DOMContentLoaded', () => {
-    const projects = document.querySelectorAll('.project-item');
-    let currentIndex = 0;
+    const slider = document.querySelector('.container')
+    const cards = document.querySelector('.cards')
+    const goMoreButton = document.querySelectorAll("#go-more");
+    enablePointerEvents()
 
-    const showProject = (index) => {
-        projects.forEach((project, i) => {
-            project.classList.toggle('hidden', i !== index);
+    let isPressed = false;
+    let cursorX;
 
-            project.classList.add('blur-xl')
-            //delay here
-            setTimeout(() => {
-                project.classList.add('transition', 'duration-500');
-                project.classList.remove('opacity-0', 'blur-xl');
-            }, 10);
-        });
-    };
-
-    document.getElementById('next-project').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % projects.length;
-        showProject(currentIndex);
+    slider.addEventListener("mousedown", (e) => {
+        isPressed = true;
+        cursorX = e.offsetX - cards.offsetLeft;
+        slider.style.cursor = "grabbing";
+        setTimeout(()=> {
+            disablePointerEvents();
+        }, 100);
     });
 
-    document.getElementById('prev-project').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + projects.length) % projects.length;
-        showProject(currentIndex);
+    slider.addEventListener("mousemove", (e) => {
+        if (!isPressed) return;
+        e.preventDefault();
+        cards.style.left = `${e.offsetX - cursorX}px`;
+        boundSlides();
     });
 
-    // Initialize first project
-    showProject(currentIndex);
+
+    window.addEventListener("mouseup", () => {
+        isPressed = false;
+        enablePointerEvents();
+    });
+
+    // Handle touchstart (mobile)
+    slider.addEventListener("touchstart", (e) => {
+        isPressed = true;
+        cursorX = e.touches[0].clientX - cards.offsetLeft;
+        slider.style.cursor = "grabbing";
+        setTimeout(()=> {
+            disablePointerEvents();
+        }, 100);
+    });
+
+    // Handle touchmove (mobile)
+    slider.addEventListener("touchmove", (e) => {
+        if (!isPressed) return;
+        e.preventDefault();
+        cards.style.left = `${e.touches[0].clientX - cursorX}px`;
+        boundSlides();
+    });
+
+    // Handle touchend (mobile)
+    window.addEventListener("touchend", () => {
+        isPressed = false;
+        slider.style.cursor = "grab";
+        enablePointerEvents()
+    });
+
+    function boundSlides() {
+        const containerRect = slider.getBoundingClientRect();
+        const cardsRect = cards.getBoundingClientRect();
+
+        if (parseInt(cards.style.left) > 0) {
+            cards.style.left = 0;
+        } else if (cardsRect.right < containerRect.right) {
+            cards.style.left = `-${cardsRect.width - containerRect.width}px`;
+        }
+    }
+
+    function disablePointerEvents() {
+        goMoreButton.forEach(button => button.style.pointerEvents = 'none');
+    }
+
+    // Function to enable pointer events on the "Go to for more" button
+    function enablePointerEvents() {
+        goMoreButton.forEach(button => button.style.pointerEvents = 'auto');
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
