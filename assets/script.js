@@ -48,7 +48,37 @@ document.addEventListener("DOMContentLoaded", function() {
 
     addColorAndRemove();
 });
+//Fade in effect from right to left for contact-me
+document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in-contact');
 
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('translate-x-full', 'blur-xl')
+                //delay here
+                setTimeout(() => {
+                    entry.target.classList.add('transition', 'duration-500', 'opacity-100', 'translate-x-0');
+                    entry.target.classList.remove('opacity-0', 'blur-xl', 'translate-x-full');
+                }, 10);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
+
+//Fade in effect from left to right
 document.addEventListener('DOMContentLoaded', () => {
     const fadeElements = document.querySelectorAll('.fade-in');
 
