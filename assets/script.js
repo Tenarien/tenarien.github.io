@@ -318,3 +318,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 });
+
+// Glow effect for the name in header
+document.addEventListener('DOMContentLoaded', () => {
+    const nameText = document.querySelectorAll('.name-text');
+    loopGlowEffect();
+
+    function loopGlowEffect() {
+        setInterval(() => {
+            glowEffect();
+        }, 2000);
+    }
+
+    function glowEffect() {
+        nameText.forEach((name) => {
+            name.classList.add('transition', 'duration-1000', 'scale-110');
+        });
+
+        setTimeout(() => {
+            nameText.forEach((name) => {
+                name.classList.remove('scale-110');
+            });
+        }, 1000);
+    }
+});

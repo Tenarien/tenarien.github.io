@@ -14,15 +14,26 @@
     <p class="text-5xl min-w-max h-auto cursor-pointer hover:scale-110">&uarr;</p>
 </div>
 <!-- Header -->
-<header id="header" class="p-6 bg-orange-300 shadow-custom-side md:fixed md:left-0 md:top-0 md:w-1/3 md:h-screen flex flex-col justify-between">
+<header id="header" class="p-6 bg-customBeige shadow-custom-side md:fixed md:left-0 md:top-0 md:w-1/3 md:h-screen flex flex-col justify-between">
     <div>
         <!-- Image, Introduction -->
-        <div class="flex flex-wrap justify-center items-center">
-            <div class="relative max-w-xs overflow-hidden bg-cover bg-no-repeat flex-shrink-0 w-24 h-auto shadow-custom-less">
-                <img class="w-full h-full rounded-t-lg transition duration-300 ease-in-out hover:scale-110" src="assets/images/profile.png" alt="Profile">
+        <div class="flex flex-col justify-center items-center">
+            <div class="max-w-xs overflow-hidden bg-cover bg-no-repeat flex-shrink-0 w-24 h-auto shadow-custom-less transition duration-500 ease-in-out hover:scale-110 flex items-center justify-center">
+                <img class="w-full h-full object-cover object-center rounded-t-lg transition duration-300 ease-in-out hover:scale-110" src="assets/images/profile.png" alt="Profile">
             </div>
-            <div class="overflow-hidden text-center">
-                <h1 class="text-5xl m-6"><span>Hi, I am </span><strong class="text-blue-400">Krzysztof</strong></h1>
+            <div class="text-center">
+                <h1 class="text-5xl font-semibold mt-4">Hi, I am </h1>
+                <div class="relative inline-block">
+                    <span class="text-6xl z-10 relative font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 typing-effect">
+                        Krzysztof
+                    </span>
+                    <span class="name-text absolute inset-0 text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400 opacity-100 blur-sm">
+                        Krzysztof
+                    </span>
+                    <span class="name-text absolute inset-0 text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-300 opacity-100 blur-lg">
+                        Krzysztof
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -59,7 +70,8 @@
         </div>
     </div>
     <!-- Footer -->
-    <footer class="hidden md:block mb-20 rounded-2xl bg-stone-200  w-full shadow-custom transition duration-300 hover:shadow-custom-less">
+    <footer class="hidden relative md:block mb-20 rounded-2xl bg-customBeige  w-full shadow-custom transition duration-300 hover:shadow-custom-less">
+        <div class="bg-black h-full w-full absolute bg-opacity-30 rounded-2xl"></div>
         <div class="flex justify-center items-center">
             <a href="https://github.com/Tenarien" target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 32 32">
@@ -179,7 +191,7 @@
             <div class="relative h-[50vh] tall:h-[30vh] parallax-bg overflow-hidden">
                 <div class="absolute bg-black h-full w-full bg-opacity-75"></div>
                 <div class="fade-top opacity-0 flex flex-col items-center">
-                    <p class="font-semibold text-3xl text-blue-600 mt-12 mb-2">Contact</p>
+                    <p class="font-semibold text-3xl text-customBeige mt-12 mb-2">Contact</p>
                     <p class="text-sm text-white font-bold">I would love to hear from you!</p>
                     <div class="flex gap-4 md:gap-12 mt-12 md:mt-24">
                         <div class="flex flex-col justify-center items-center">
@@ -188,7 +200,7 @@
                                     <path fill-rule="evenodd" d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z" clip-rule="evenodd"/>
                                 </svg>
                             </div>
-                            <a href="https://www.google.com/maps?q=Leicester" target="_blank" class="text-sm font-bold text-blue-500 text-bold hover:text-blue-700">Find me...</a>
+                            <a href="https://www.google.com/maps?q=Leicester" target="_blank" class="text-sm font-bold text-customBeige text-bold hover:scale-110 transition duration-500">Find me...</a>
                         </div>
                         <div class="flex flex-col justify-center items-center">
                             <div>
@@ -196,7 +208,7 @@
                                     <path fill-rule="evenodd" d="M3.559 4.544c.355-.35.834-.544 1.33-.544H19.11c.496 0 .975.194 1.33.544.356.35.559.829.559 1.331v9.25c0 .502-.203.981-.559 1.331-.355.35-.834.544-1.33.544H15.5l-2.7 3.6a1 1 0 0 1-1.6 0L8.5 17H4.889c-.496 0-.975-.194-1.33-.544A1.868 1.868 0 0 1 3 15.125v-9.25c0-.502.203-.981.559-1.331ZM7.556 7.5a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2h-8Zm0 3.5a1 1 0 1 0 0 2H12a1 1 0 1 0 0-2H7.556Z" clip-rule="evenodd"/>
                                 </svg>
                             </div>
-                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=krisromanowski63@gmail.com&su=Hello%20Krzysztof&body=I%20am%20interested%20in%20your%20work.%20Let's%20connect!" target="_blank" class="text-sm font-bold text-blue-500 text-bold hover:text-blue-700">Email me...</a>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=krisromanowski63@gmail.com&su=Hello%20Krzysztof&body=I%20am%20interested%20in%20your%20work.%20Let's%20connect!" target="_blank" class="text-sm font-bold text-customBeige text-bold hover:scale-110 transition duration-500">Email me...</a>
                         </div>
                         <div class="flex flex-col justify-center items-center">
                             <div>
@@ -204,7 +216,7 @@
                                     <path d="M12 0C5.373 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.387.6.11.793-.26.793-.577v-2.022c-3.338.726-4.033-1.608-4.033-1.608-.546-1.386-1.333-1.755-1.333-1.755-1.09-.745.083-.729.083-.729 1.204.084 1.836 1.236 1.836 1.236 1.07 1.834 2.807 1.304 3.492.996.11-.775.42-1.305.762-1.605-2.665-.306-5.466-1.332-5.466-5.931 0-1.31.468-2.38 1.235-3.22-.124-.303-.536-1.524.117-3.177 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.398 3.003-.404 1.02.006 2.047.138 3.004.404 2.292-1.553 3.298-1.23 3.298-1.23.653 1.653.241 2.874.118 3.177.768.84 1.235 1.91 1.235 3.22 0 4.61-2.804 5.621-5.475 5.921.43.37.815 1.102.815 2.222v3.293c0 .32.19.694.799.577C20.565 21.797 24 17.302 24 12c0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </div>
-                            <a href="https://github.com/Tenarien" target="_blank" class="text-sm font-bold text-blue-500 text-bold hover:text-blue-700">Follow me...</a>
+                            <a href="https://github.com/Tenarien" target="_blank" class="text-sm font-bold text-customBeige text-bold hover:scale-110 transition duration-500">Follow me...</a>
                         </div>
                     </div>
                 </div>
@@ -221,7 +233,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="md:hidden sm:flex justify-center items-center w-full bg-gray-600 bg-opacity-20 py-4">
+<footer class="md:hidden sm:flex justify-center items-center w-full bg-customBeige py-4">
     <div class="flex justify-center items-center">
         <a href="https://github.com/Tenarien">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 32 32">
@@ -240,8 +252,8 @@
         </a>
     </div>
     <div class="block justify-center items-center text-sm text-white text-opacity-50 p-2 gap-6">
-        <p class="text-center">© Copyright 2024</p>
-        <p class="text-center">Designed by <a class="text-white text-opacity-100 hover:text-blue-400" href="https://github.com/Tenarien">Krzysztof Romanowski</a></p>
+        <p class="text-center text-black">© Copyright 2024</p>
+        <p class="text-center text-black">Designed by <a class="text-black font-bold text-opacity-100 hover:text-blue-400" href="https://github.com/Tenarien">Krzysztof Romanowski</a></p>
     </div>
 </footer>
 </body>

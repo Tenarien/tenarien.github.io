@@ -19,6 +19,9 @@ module.exports = {
       screens: {
         'tall': { 'raw': '(min-height: 800px)'}
       },
+      colors: {
+        customBeige: '#D2B48C',
+      },
     },
   },
   plugins: [],

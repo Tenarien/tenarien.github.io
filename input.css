@@ -13,6 +13,11 @@
 
     .container {
         position: relative;
+        scrollbar-width: none;
+    }
+
+    .container::-webkit-scrollbar {
+        display: none;
     }
 
     .cards {
