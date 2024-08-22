@@ -16,6 +16,9 @@ module.exports = {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
       },
+      screens: {
+        'tall': { 'raw': '(min-height: 800px)'}
+      },
     },
   },
   plugins: [],
