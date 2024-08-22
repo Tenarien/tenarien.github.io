@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 //Fade in effect from right to left for contact-me
 document.addEventListener('DOMContentLoaded', () => {
-    const fadeElements = document.querySelectorAll('.fade-in-contact');
+    const fadeElements = document.querySelectorAll('.fade-right');
 
     const options = {
         root: null,
@@ -116,6 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isPressed = false;
     let cursorX;
+    let isScrollingVertically = false;
+    let startX, startY, moveX, moveY;
+    const threshold = 10;
 
     slider.addEventListener("mousedown", (e) => {
         isPressed = true;
@@ -142,26 +145,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle touchstart (mobile)
     slider.addEventListener("touchstart", (e) => {
         isPressed = true;
-        cursorX = e.touches[0].clientX - cards.offsetLeft;
+        isScrollingVertically = false;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
         slider.style.cursor = "grabbing";
-        setTimeout(()=> {
+
+        // Disabling pointer events after a slight delay
+        setTimeout(() => {
             disablePointerEvents();
         }, 100);
     });
 
-    // Handle touchmove (mobile)
     slider.addEventListener("touchmove", (e) => {
         if (!isPressed) return;
-        e.preventDefault();
-        cards.style.left = `${e.touches[0].clientX - cursorX}px`;
-        boundSlides();
-    });
+
+        moveX = e.touches[0].clientX;
+        moveY = e.touches[0].clientY;
+
+        let diffX = moveX - startX;
+        let diffY = moveY - startY;
+
+
+        if (isScrollingVertically) {
+            // If already scrolling vertically, do nothing
+            return;
+        }
+
+        if (Math.abs(diffY) + 5 > Math.abs(diffX)) {
+            // If the vertical movement is greater than horizontal, allow vertical scrolling
+            isScrollingVertically = true;
+            return;
+        } else {
+            // If horizontal movement is greater, prevent vertical scroll and move the slider
+            e.preventDefault();
+            slider.scrollLeft -= diffX; // Scroll the slider horizontally
+            startX = moveX; // Update the startX for the next movement
+        }
+    }, { passive: false });
 
     // Handle touchend (mobile)
     window.addEventListener("touchend", () => {
         isPressed = false;
+        isScrollingVertically = false; // Reset vertical scroll flag
         slider.style.cursor = "grab";
-        enablePointerEvents()
+        enablePointerEvents();
     });
 
     function boundSlides() {
@@ -185,10 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+//Go top button script
 document.addEventListener('DOMContentLoaded', () => {
     const goTopButton = document.getElementById('go-top');
     const main = document.getElementById('main-content');
-    const aboutMeSection = document.getElementById('about-me');
+    const targets = [document.getElementById('header'), document.getElementById('about-me')];
 
     const options = {
         root: null,
@@ -198,13 +226,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.target === aboutMeSection) {
+            if (targets.includes(entry.target)) {
                 if (entry.isIntersecting) {
-                    // Hide 'Go Top' button when 'About Me' section is in view
+                    // Hide 'Go Top' button when any target section is in view
                     goTopButton.classList.add('opacity-0');
                     goTopButton.classList.remove('opacity-100');
                 } else {
-                    // Show 'Go Top' button when 'About Me' section is not in view
+                    // Show 'Go Top' button when no target section is in view
                     goTopButton.classList.remove('opacity-0');
                     goTopButton.classList.add('opacity-100');
                 }
@@ -212,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, options);
 
-    observer.observe(aboutMeSection);
+    targets.forEach(target => observer.observe(target));
 
     // Smooth scroll to the top when the button is clicked
     goTopButton.addEventListener('click', (event) => {
@@ -229,43 +257,5 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         }
 
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const image1 = document.getElementById('project-1-image');
-    const image1Overlay = document.getElementById('project-1-image-overlay');
-    const elements = [image1, image1Overlay];
-
-    const handleOver = () => {
-        image1Overlay.classList.remove('hidden'); // Make sure the overlay is visible
-        image1Overlay.classList.add('-translate-x-full');
-
-        // Apply transition with a slight delay to make sure the class is added
-        setTimeout(() => {
-            image1Overlay.classList.add('transition', 'duration-500', 'translate-x-0');
-            image1Overlay.classList.remove('-translate-x-full');
-        }, 10);
-
-        image1.classList.add('transition', 'duration-500', 'blur', 'scale-105');
-    };
-
-    const handleOut = () => {
-        image1.classList.remove('blur', 'scale-105');
-        image1Overlay.classList.remove('blur');
-
-        // Reset overlay position with a slight delay
-        setTimeout(() => {
-            image1Overlay.classList.add('-translate-x-full');
-            image1Overlay.classList.remove('translate-x-0');
-        }, 10);
-    };
-
-    // Attach event listeners for each element
-    elements.forEach(element => {
-        element.addEventListener('mouseover', handleOver);
-        element.addEventListener('touchstart', handleOver);
-        element.addEventListener('mouseout', handleOut);
-        element.addEventListener('touchend', handleOut);
     });
 });
