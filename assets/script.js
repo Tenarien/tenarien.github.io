@@ -107,6 +107,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+//Fade in effect from top to bottom
+document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-top');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('-translate-y-full', 'blur')
+                //delay here
+                setTimeout(() => {
+                    entry.target.classList.remove('opacity-0', 'translate-y-full', 'blur');
+                    entry.target.classList.add('opacity-100', 'duration-1000', 'translate-y-0');
+                }, 10);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
+// fade in effect for cards
+document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-card');
+    fadeElements.forEach(element => {
+       element.classList.add('-translate-y-1/2', 'blur', 'opacity-0');
+    });
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                fadeElements.forEach(element => {
+                    entry.target.classList.remove('opacity-0', 'translate-y-full', 'blur');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
 //Slider script
 document.addEventListener('DOMContentLoaded', () => {
     const slider = document.querySelector('.container')
